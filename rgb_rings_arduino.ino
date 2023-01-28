@@ -1,17 +1,18 @@
 #include <FastLED.h>
 #include <bluefairy.h>
+#include "palettes.h"
 #include "utils.h"
 
-#define NUM_LEDS    32
+#define NUM_LEDS   16 
 #define BRIGHTNESS  40
-#define DISPLAY_HERTZ 60
-#define ROTATION_HERTZ 0.3
+#define DISPLAY_HERTZ 90
+#define ROTATION_HERTZ 1.0
 
 bluefairy::Scheduler scheduler;
 
 CRGB leds[NUM_LEDS];
 
-CRGBPalette16 currentPalette = RainbowColors_p;
+CRGBPalette16 currentPalette = getRandomPalette();
 CRGBPalette16 nextPalette = getRandomPalette();
 
 // 256 fastLED index units per rotation * x rotations per second / y display refreshes per second
@@ -47,4 +48,3 @@ void loop() {
   scheduler.loop();
   random16_add_entropy(1);
 }
-
