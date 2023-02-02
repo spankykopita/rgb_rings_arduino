@@ -3,6 +3,7 @@
 #include <bluefairy.h>
 #include "palettes.h"
 #include "utils.h"
+#include "audio.h"
 
 #define NUM_LEDS   16 
 #define BRIGHTNESS  40
@@ -11,13 +12,6 @@
 
 // Digital
 #define LED_PIN 1
-// Analog
-#define MICROPHONE_PIN A2
-
-#define SAMPLES_COUNT 100
-#define SAMPLING_FREQUENCY 8000 //Hz, must be less than 10000 due to ADC
-
-unsigned int samplingPeriodMicro = round(1000000*(1.0/SAMPLING_FREQUENCY));
 
 bluefairy::Scheduler scheduler;
 
@@ -56,41 +50,10 @@ void setup() {
   scheduler.every(100, [](){
     nblendPaletteTowardPalette(currentPalette, nextPalette, 80);
   });
-  scheduler.every(37, [](){
-    // Correct
-    // int micSample = analogRead(MICROPHONE_PIN); // Same as analogRead(2)
-    // Serial.print("Sample1:");
-    // Serial.println(micSample);
-
-    // Flatline? This is almost definitely the LED A0 pin
-    // int micSample2 = analogRead(0);
-    // Serial.print("Sample2:");
-    // Serial.println(micSample2);
-
-    // Reacts to A1 touch
-    // int micSample3 = analogRead(1);
-    // Serial.print("Sample3:");
-    // Serial.println(micSample3);
-
-    int min = 1024;
-    int max = 0;
-    for (int i = 0; i < SAMPLES_COUNT; i++) {
-      unsigned long microseconds = micros();
-      int sample = analogRead(MICROPHONE_PIN);
-      if (sample > max) {
-        max = sample;
-      }
-      if (sample < min) {
-        min = sample;
-      }
-      while (micros() < (microseconds + samplingPeriodMicro)) { }
-    }
-    Serial.print("Amplitude:");
-    Serial.println(max - min);
-  });
+  scheduler.every(51, recordAmplitude);
 }
 
 void loop() {
   scheduler.loop();
-  random16_add_entropy(1);
+  random16_add_entropy(analogRead(1));
 }
