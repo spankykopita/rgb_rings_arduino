@@ -1,11 +1,11 @@
 // Analog
 #define MICROPHONE_PIN A2
 
-#define SAMPLES_COUNT 300
+#define SAMPLES_COUNT 600
 #define SAMPLING_FREQUENCY 10000 //Hz, must be less than 10000 due to ADC
 
 // 10000 hertz of sampling is 100 microseconds per sample
-// 300 samples at 100 microseconds apiece => sampling over 30 milliseconds
+// 600 samples at 100 microseconds apiece => sampling over 60 milliseconds
 unsigned int samplingPeriodMicro = round(1000000*(1.0/SAMPLING_FREQUENCY));
 
 unsigned int smoothedAmplitude = 100;
@@ -40,12 +40,12 @@ void recordAmplitude() {
   Serial.print("Amplitude:");
   Serial.println(maxSample - minSample);
 
-  smoothedAmplitude = smoothedAmplitude * 0.4 + (maxSample - minSample) * 0.6;
+  smoothedAmplitude = smoothedAmplitude * 0.5 + (maxSample - minSample) * 0.5;
   Serial.print("SmoothedAmplitude:");
   Serial.println(smoothedAmplitude);
 
-  minAmplitude = min(minAmplitude, smoothedAmplitude) * 1.01;
-  maxAmplitude = max(maxAmplitude, smoothedAmplitude) * 0.99;
+  minAmplitude = min(minAmplitude * 1.001, smoothedAmplitude);
+  maxAmplitude = max(maxAmplitude * 0.999, smoothedAmplitude);
   Serial.print("MinAmplitude:");
   Serial.println(minAmplitude);
   Serial.print("MaxAmplitude:");
