@@ -6,7 +6,7 @@
 #include "audio.h"
 
 #define NUM_LEDS   32
-#define BRIGHTNESS  70
+#define BRIGHTNESS  255
 #define DISPLAY_HERTZ 90
 #define ROTATION_HERTZ 1.0
 
@@ -39,14 +39,14 @@ void setup() {
   scheduler.every(1000 / DISPLAY_HERTZ, [](){
     double amplitudeRatio = (smoothedAmplitude - minAmplitude) / (maxAmplitude - minAmplitude);
     // rotationOffset += rotationIncrement;
-    rotationOffset += rotationIncrement * (amplitudeRatio - 0.7) * 10.0;
+    rotationOffset += rotationIncrement * (amplitudeRatio - 0.7) * 15.0;
     // if (amplitudeRatio < 0.5) rotationOffset = 0.0;
 
     // brightness = 255;
     // brightness = mapToByteRange(smoothedAmplitude, minAmplitude, maxAmplitude);
     // brightness = map(smoothedAmplitude, minAmplitude, maxAmplitude, 20, 255);
     brightness = amplitudeRatio > 0.7 ? 255 :
-      brightness < 10 ? 0 : brightness - 15;
+      brightness < 10 ? 0 : brightness - 5;
 
     for (int i = 0; i < LEDS_PER_CIRCLE; i++) {
       uint8_t colorIndex = mapToByteRange(i, 0, LEDS_PER_CIRCLE);
