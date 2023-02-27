@@ -3,6 +3,7 @@
 
 #define SAMPLES_COUNT 600
 #define SAMPLING_FREQUENCY 10000 //Hz, must be less than 10000 due to ADC
+#define PEAK_THRESHOLD 0.8
 
 // 10000 hertz of sampling is 100 microseconds per sample
 // 600 samples at 100 microseconds apiece => sampling over 60 milliseconds
@@ -11,6 +12,9 @@ unsigned int samplingPeriodMicro = round(1000000*(1.0/SAMPLING_FREQUENCY));
 unsigned int smoothedAmplitude = 100;
 float minAmplitude = 1024;
 float maxAmplitude = 0;
+double amplitudeRatio = 0.0;
+bool isPeak = false;
+bool isStartOfPeak = false;
 
 void recordAmplitude() {
   // Correct
@@ -50,4 +54,14 @@ void recordAmplitude() {
   Serial.println(minAmplitude);
   Serial.print("MaxAmplitude:");
   Serial.println(maxAmplitude);
+
+  amplitudeRatio = (smoothedAmplitude - minAmplitude) / (maxAmplitude - minAmplitude);
+  bool newIsPeak = amplitudeRatio > PEAK_THRESHOLD;
+  isStartOfPeak = !isPeak && newIsPeak;
+  isPeak = newIsPeak;
+  Serial.print("IsPeak:");
+  Serial.println(isPeak);
+
+  Serial.print("IsStartOfPeak:");
+  Serial.println(isStartOfPeak);
 }
