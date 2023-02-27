@@ -6,9 +6,9 @@
 #include "audio.h"
 
 #define NUM_LEDS   32
-#define BRIGHTNESS  255
+#define BRIGHTNESS  60
 #define DISPLAY_HERTZ 90
-#define ROTATION_HERTZ 1.0
+#define MAX_ROTATION_HERTZ 15.0
 
 uint8_t LEDS_PER_CIRCLE = NUM_LEDS / 2;
 
@@ -24,7 +24,7 @@ CRGBPalette16 nextPalette = getRandomPalette();
 
 // 256 fastLED index units per rotation * x rotations per second / y display refreshes per second
 // = fastLED index units per display refresh
-int rotationIncrement = 256 * ROTATION_HERTZ / DISPLAY_HERTZ;
+int rotationIncrement = 256 * MAX_ROTATION_HERTZ / DISPLAY_HERTZ;
 uint8_t rotationOffset = 0;
 
 uint8_t brightness = 0;
@@ -41,11 +41,11 @@ void setup() {
 
     if (isStartOfPeak) {
       rotationIncrement *= -1;
-      // currentPalette = getRandomPalette();
+      currentPalette = getRandomPalette();
     }
     
-    // rotationOffset += rotationIncrement;
-    rotationOffset += rotationIncrement * (amplitudeRatio - 0.5) * 20.0;
+    // rotationIncrement is the max speed per display refresh, but we "slow it down" based on the intensity of the music
+    rotationOffset += rotationIncrement * (amplitudeRatio - 0.5) / 0.5;
     // if (amplitudeRatio < 0.5) rotationOffset = 0.0;
 
     // brightness = 255;
