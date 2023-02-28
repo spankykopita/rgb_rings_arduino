@@ -3,10 +3,10 @@
 #include <bluefairy.h>
 #include "palettes.h"
 #include "utils.h"
+#include "settings.h"
 #include "audio.h"
 
 #define NUM_LEDS   32
-#define BRIGHTNESS  60
 #define DISPLAY_HERTZ 90
 #define MAX_ROTATION_HERTZ 15.0
 
@@ -32,7 +32,8 @@ uint8_t brightness = 0;
 void setup() {
   random16_add_entropy(analogRead(MICROPHONE_PIN));
   FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
-  FastLED.setBrightness(BRIGHTNESS);
+
+  initializeSettings();
 
   Serial.begin(9600);
   
@@ -62,6 +63,9 @@ void setup() {
 
     FastLED.show();
   });
+
+
+  scheduler.every(51, checkButtons);
 
   scheduler.every(1000, [](){
     nextPalette = getRandomPalette();
