@@ -15,6 +15,8 @@ float maxAmplitude = 0;
 double amplitudeRatio = 0.0;
 bool isPeak = false;
 bool isStartOfPeak = false;
+unsigned long startOfPeakMillis;
+unsigned int lengthOfPeakMillis;
 
 void recordAmplitude() {
   // Correct
@@ -64,4 +66,16 @@ void recordAmplitude() {
 
   Serial.print("IsStartOfPeak:");
   Serial.println(isStartOfPeak);
+
+  if (isStartOfPeak) {
+    startOfPeakMillis = millis();
+    lengthOfPeakMillis = 0;
+  } else if (isPeak) {
+    lengthOfPeakMillis = millis() - startOfPeakMillis;
+  } else {
+    lengthOfPeakMillis = 0;
+  }
+
+  Serial.print("LengthOfPeak:");
+  Serial.println(lengthOfPeakMillis);
 }
