@@ -1,5 +1,5 @@
 // Analog
-#define MICROPHONE_PIN A2
+#define MICROPHONE_PIN A1
 
 #define SAMPLES_COUNT 600
 #define SAMPLING_FREQUENCY 10000 //Hz, must be less than 10000 due to ADC

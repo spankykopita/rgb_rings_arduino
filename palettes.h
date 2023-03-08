@@ -135,34 +135,6 @@ DEFINE_GRADIENT_PALETTE( scoutie_gp ) {
   216,   1,  0, 39,
   255,   1,  0, 39};
 
-// Gradient palette "trove_gp", originally from
-// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/trove.png.index.html
-// converted for FastLED with gammas (2.6, 2.2, 2.5)
-// Size: 84 bytes of program space.
-
-DEFINE_GRADIENT_PALETTE( trove_gp ) {
-    0,  12, 23, 11,
-   12,   8, 52, 27,
-   25,  32,142, 64,
-   38,  55, 68, 30,
-   51, 190,135, 45,
-   63, 201,175, 59,
-   76, 186, 80, 20,
-   89, 220, 79, 32,
-  101, 184, 33, 14,
-  114, 137, 16, 15,
-  127, 118, 20, 27,
-  140,  79, 16, 35,
-  153,  67,  8, 26,
-  165,  22,  9, 42,
-  178,  11,  3, 34,
-  191,  58, 31,109,
-  204, 186, 49, 83,
-  216, 182, 25, 55,
-  229,  39, 90,100,
-  242,  15, 81,132,
-  255,  68,135, 52};
-
 // Gradient palette "bhw1_24_gp", originally from
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw1/tn/bhw1_24.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
@@ -178,34 +150,6 @@ DEFINE_GRADIENT_PALETTE( bhw1_24_gp ) {
   186,  69, 54,214,
   219, 121,255,255,
   255,  69, 54,214};
-
-// Gradient palette "spellbound_gp", originally from
-// http://soliton.vm.bytemark.co.uk/pub/cpt-city/rc/tn/spellbound.png.index.html
-// converted for FastLED with gammas (2.6, 2.2, 2.5)
-// Size: 84 bytes of program space.
-
-DEFINE_GRADIENT_PALETTE( spellbound_gp ) {
-    0, 232,235, 40,
-   12, 157,248, 46,
-   25, 100,246, 51,
-   45,  53,250, 33,
-   63,  18,237, 53,
-   81,  11,211,162,
-   94,  18,147,214,
-  101,  43,124,237,
-  112,  49, 75,247,
-  127,  49, 75,247,
-  140,  92,107,247,
-  150, 120,127,250,
-  163, 130,138,252,
-  173, 144,131,252,
-  186, 148,112,252,
-  196, 144, 37,176,
-  211, 113, 18, 87,
-  221, 163, 33, 53,
-  234, 255,101, 78,
-  247, 229,235, 46,
-  255, 229,235, 46};
 
 // Gradient palette "es_pinksplash_08_gp", originally from
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/pink_splash/tn/es_pinksplash_08.png.index.html
@@ -295,24 +239,6 @@ DEFINE_GRADIENT_PALETTE( bhw3_32_gp ) {
   193, 155, 16, 11,
   216,  73,  1,168,
   255,   1,  4, 29};
-
-// Gradient palette "bhw3_11_gp", originally from
-// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw3/tn/bhw3_11.png.index.html
-// converted for FastLED with gammas (2.6, 2.2, 2.5)
-// Size: 44 bytes of program space.
-
-DEFINE_GRADIENT_PALETTE( bhw3_11_gp ) {
-    0, 192,252, 49,
-   20, 171,252, 15,
-   53,  82,241, 13,
-   86, 153,248, 88,
-  109,  92,248, 64,
-  137, 229,255,160,
-  155, 161,250, 32,
-  188,  54,244, 34,
-  216,  66,246, 46,
-  247,  69,248, 21,
-  255,  69,248, 21};
 
 // Gradient palette "bhw3_62_gp", originally from
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw3/tn/bhw3_62.png.index.html
@@ -615,16 +541,13 @@ CRGBPalette16 palettes[] = {
   bhw1_04_gp,
   Sunset_Real_gp,
   scoutie_gp,
-  trove_gp,
   bhw1_24_gp,
-  spellbound_gp,
   es_pinksplash_08_gp,
   Sunset_Wow_gp,
   a_gp,
   bhw1_05_gp,
   bhw2_turq_gp,
   bhw3_32_gp,
-  bhw3_11_gp,
   bhw3_62_gp,
   bhw4_057_gp, // Starts black FYI
   saga_13_gp,
