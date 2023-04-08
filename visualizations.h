@@ -2,8 +2,8 @@
 #include <FastLED.h>
 
 #define NUM_LEDS   32
-#define DISPLAY_HERTZ 90
-#define MAX_ROTATION_HERTZ 20.0
+#define DISPLAY_HERTZ 60
+#define MAX_ROTATION_HERTZ 5.0
 
 typedef enum {
   spinny,
@@ -73,10 +73,10 @@ void showSparkles() {
     blackOut();
     lastViz = sparkle;
   }
-  
+
   setBrightnessByPeak();
 
   uint8_t ledToSparkle = random8(LEDS_PER_CIRCLE);
   setColorToPixel(ledToSparkle);
-  fadeAll(100);
+  fadeAll(60);
 }

@@ -6,7 +6,7 @@
 #include "audio.h"
 #include "visualizations.h"
 
-#define BRIGHTNESS  60
+#define MAX_BRIGHTNESS 255
 
 // Digital
 #define LED_PIN 1
@@ -16,13 +16,13 @@ bluefairy::Scheduler scheduler;
 void setup() {
   random16_add_entropy(analogRead(MICROPHONE_PIN));
   FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
-  FastLED.setBrightness(BRIGHTNESS);
+  FastLED.setBrightness(MAX_BRIGHTNESS);
 
   Serial.begin(9600);
+
+  scheduler.every(53, recordAmplitude);
   
   scheduler.every(1000 / DISPLAY_HERTZ, [](){
-    recordAmplitude();
-
     if (isStartOfPeak) {
       // Switch direction and change colors
       rotationIncrement *= -1;
@@ -31,7 +31,7 @@ void setup() {
 
     rotateColors();
   
-    if (lengthOfPeakMillis > 300) {
+    if (lengthOfPeakMillis > 150) {
       showSparkles();
     } else {
       showSpinnyRing();
@@ -50,5 +50,5 @@ void setup() {
 
 void loop() {
   scheduler.loop();
-  random16_add_entropy(analogRead(0) + millis());
+  random16_add_entropy(smoothedAmplitude + millis());
 }
