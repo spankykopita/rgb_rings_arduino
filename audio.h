@@ -50,8 +50,10 @@ void recordAmplitude() {
   Serial.print("SmoothedAmplitude:");
   Serial.println(smoothedAmplitude);
 
-  minAmplitude = min(minAmplitude * 1.001, smoothedAmplitude);
-  maxAmplitude = max(maxAmplitude * 0.999, smoothedAmplitude);
+  float minDecay = TARGET_DEVICE == waterBottle ? 1.003 : 1.001;
+  minAmplitude = min(minAmplitude * minDecay, smoothedAmplitude);
+  float maxDecay = TARGET_DEVICE == waterBottle ? 0.95 : 0.999;
+  maxAmplitude = max(maxAmplitude * maxDecay, smoothedAmplitude);
   Serial.print("MinAmplitude:");
   Serial.println(minAmplitude);
   Serial.print("MaxAmplitude:");
